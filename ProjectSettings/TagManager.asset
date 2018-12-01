@@ -8,6 +8,8 @@ TagManager:
   - Guard
   - Peasant
   - Blocking
+  - coletadorAgua
+  - agua
   layers:
   - Default
   - TransparentFX
