@@ -101,9 +101,13 @@ public class Sequence : CompositeNode {
                 if (result == NodeStatus.SUCCESS) {
                     done.Add (child);
                     //return NodeStatus.RUNNING;
+                } else if (result == NodeStatus.FAIL) {
+                    // Se retornar fail, cancela execução e retorna fail
+                    done.Clear ();
+                    return NodeStatus.FAIL;
+                } else {
+                    return NodeStatus.RUNNING;
                 }
-                // Se retornar fail, cancela execução e retorna fail
-                else return result;
             }
         }
         // Quando passar por todos os filhos sem problemas, retornar success
@@ -128,9 +132,13 @@ public class Selector : CompositeNode {
                 if (result == NodeStatus.FAIL) {
                     done.Add (child);
                     //return NodeStatus.RUNNING;
+                } else if (result == NodeStatus.SUCCESS) {
+                    // Se o filho retornar success, termina a execução e retorna success
+                    done.Clear ();
+                    return NodeStatus.SUCCESS;
+                } else {
+                    return NodeStatus.RUNNING;
                 }
-                // Se o filho retornar success, termina a execução e retorna success
-                else return result;
             }
         }
         // Quando passar por todos os filhos, e nenhum retornar success, retornar fail
@@ -139,7 +147,11 @@ public class Selector : CompositeNode {
     }
 }
 
-//////////////////////////////////////// Leaf Nodes ////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                          //
+//                                        Leaf nodes                                        //
+//                                                                                          //
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 /// Node para mover o BehaviourAgent para frente.
 public class SimpleWalkNode : Node {

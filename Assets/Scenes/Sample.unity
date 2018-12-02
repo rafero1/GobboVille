@@ -144,6 +144,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &37542174
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,6 +925,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1001 &304223566
 Prefab:
   m_ObjectHideFlags: 0
@@ -1219,6 +1221,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &345234852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,6 +1469,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1001 &434613042
 Prefab:
   m_ObjectHideFlags: 0
@@ -2103,6 +2107,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &681490711
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2519,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &816187599 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1659222464854474, guid: 6ea36b88d4b65684ab89c2896736be28,
@@ -2545,6 +2551,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &882654816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,6 +2697,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &913356566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,6 +2814,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &998638999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,6 +3295,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1090091653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,6 +3754,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1187554598 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1659222464854474, guid: 6ea36b88d4b65684ab89c2896736be28,
@@ -3775,6 +3786,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1196597211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4230,6 +4242,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1305946929 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1659222464854474, guid: 6ea36b88d4b65684ab89c2896736be28,
@@ -4261,6 +4274,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1352297871
 GameObject:
   m_ObjectHideFlags: 0
@@ -4411,6 +4425,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!4 &1438079581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4863546250321204, guid: 6ea36b88d4b65684ab89c2896736be28,
@@ -4447,6 +4462,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!4 &1455196740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4923537225032826, guid: 80a2a8cb9aa1c464a96d2d65c362cfe6,
@@ -4483,6 +4499,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1543671901
 GameObject:
   m_ObjectHideFlags: 0
@@ -4870,6 +4887,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1655723401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1659222464854474, guid: 6ea36b88d4b65684ab89c2896736be28,
@@ -4901,6 +4919,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1666509445
 GameObject:
   m_ObjectHideFlags: 0
@@ -4960,6 +4979,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1700978602
 GameObject:
   m_ObjectHideFlags: 0
@@ -5460,6 +5480,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1001 &1911634473
 Prefab:
   m_ObjectHideFlags: 0
@@ -5579,6 +5600,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1001 &1960875831
 Prefab:
   m_ObjectHideFlags: 0
@@ -5698,6 +5720,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 1700978607}
   storage: {fileID: 88796554}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &1996234299 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1659222464854474, guid: 6ea36b88d4b65684ab89c2896736be28,
@@ -5729,6 +5752,7 @@ MonoBehaviour:
   gatheringPoint: {fileID: 416454325}
   storage: {fileID: 574488199}
   foodStorage: {fileID: 88796554}
+  waterStorage: {fileID: 574488199}
 --- !u!1 &2065315493
 GameObject:
   m_ObjectHideFlags: 0

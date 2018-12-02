@@ -3,50 +3,107 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GathererBehaviour : BehaviourAgent {
-    private Sequence BTWander;
-    private Sequence BTGatherResource;
-    private Sequence BTEat;
+
+    private Selector BT;
 
     public bool gathering = false;
     public GatheringPoint gatheringPoint;
     public Storage storage;
 
     public FoodStorage foodStorage;
+    public WaterStorage waterStorage;
 
     // Use this for initialization
     void Start () {
         InitAttributes ();
 
-        // Cumer
-        BTEat = new Sequence ();
-        BTEat.addChild (new WalkToNode (transform, foodStorage.transform));
-        BTEat.addChild (new EatNode (this, foodStorage));
+        // Root
+        BT = new Selector ();
 
-        // Wander
-        BTWander = new Sequence ();
-        BTWander.addChild (new FindRandomPositionNode (GameObject.Find ("Floor"), this));
-        BTWander.addChild (new WalkToPositionNode (this));
-        BTWander.addChild (new WaitNode (2, 5, this));
+        // Cumer
+        Sequence SequenceEat = new Sequence ();
+        SequenceEat.addChild (new IsHungryNode (this))
+            .addChild (new WalkToNode (transform, foodStorage.transform))
+            .addChild (new EatNode (this, foodStorage));
+
+        // Beber
+        Sequence SequenceDrink = new Sequence ();
+        SequenceDrink.addChild (new IsThirstyNode (this))
+            .addChild (new WalkToNode (transform, waterStorage.transform))
+            .addChild (new DrinkNode (this, waterStorage));
 
         // Coletar
-        BTGatherResource = new Sequence ();
-        BTGatherResource.addChild (new QueroTrabalhar ());
-        BTGatherResource.addChild (new WalkToNode (transform, gatheringPoint.transform));
-        BTGatherResource.addChild (new WaitNode (2, this));
-        BTGatherResource.addChild (new WalkToNode (transform, storage.transform));
-        BTGatherResource.addChild (new StoreResource (storage, this));
+        Sequence SequenceGatherResource = new Sequence ();
+        //SequenceGatherResource.addChild (new QueroTrabalhar ())
+        SequenceGatherResource.addChild (new IsStorageFullNode (storage))
+            .addChild (new WalkToNode (transform, gatheringPoint.transform))
+            .addChild (new WaitNode (2, this))
+            .addChild (new WalkToNode (transform, storage.transform))
+            .addChild (new StoreResource (storage, this));
+
+        // Wander
+        Sequence SequenceWander = new Sequence ();
+        SequenceWander.addChild (new FindRandomPositionNode (GameObject.Find ("Floor"), this))
+            .addChild (new WalkToPositionNode (this))
+            .addChild (new WaitNode (2, 5, this));
+
+        BT.addChild (SequenceEat)
+            .addChild (SequenceDrink)
+            .addChild (SequenceGatherResource)
+            .addChild (SequenceWander);
     }
 
     // Update is called once per frame
     void Update () {
         updateAttributes ();
-        if (isHungry ()) {
-            BTEat.run ();
-        } else if (!storage.isFull () || this.gathering) {
-            BTGatherResource.run ();
-        } else {
-            BTWander.run ();
+        BT.run ();
+    }
+}
+
+public class IsThirstyNode : Node {
+    BehaviourAgent agent;
+    public IsThirstyNode (BehaviourAgent agent) {
+        this.agent = agent;
+    }
+
+    public NodeStatus run () {
+        if (agent.isThirsty ()) return NodeStatus.SUCCESS;
+        else return NodeStatus.FAIL;
+    }
+}
+
+public class DrinkNode : Node {
+
+    BehaviourAgent agent;
+    WaterStorage waterStorage;
+
+    public DrinkNode (BehaviourAgent agent, WaterStorage waterStorage) {
+        this.agent = agent;
+        this.waterStorage = waterStorage;
+    }
+
+    public NodeStatus run () {
+        if (agent.thirst == 0) {
+            return NodeStatus.SUCCESS;
         }
+
+        agent.thirst -= 50;
+        waterStorage.decreaseUnit ();
+
+        return NodeStatus.FAIL;
+
+    }
+}
+
+public class IsHungryNode : Node {
+    BehaviourAgent agent;
+    public IsHungryNode (BehaviourAgent agent) {
+        this.agent = agent;
+    }
+
+    public NodeStatus run () {
+        if (agent.isHungry ()) return NodeStatus.SUCCESS;
+        else return NodeStatus.FAIL;
     }
 }
 
@@ -73,6 +130,18 @@ public class EatNode : Node {
     }
 }
 
+public class IsStorageFullNode : Node {
+    Storage storage;
+    public IsStorageFullNode (Storage storage) {
+        this.storage = storage;
+    }
+
+    public NodeStatus run () {
+        if (storage.isFull ()) return NodeStatus.FAIL;
+        else return NodeStatus.SUCCESS;
+    }
+}
+
 public class StoreResource : Node {
     GathererBehaviour gatherer;
     Storage storage;
@@ -84,15 +153,6 @@ public class StoreResource : Node {
 
     public NodeStatus run () {
         storage.addUnit ();
-        gatherer.hunger = Random.Range (0, 11);
-
-        if (!storage.isFull ()) {
-            gatherer.gathering = true;
-
-        } else {
-            gatherer.gathering = false;
-        }
-
         return NodeStatus.SUCCESS;
 
     }
