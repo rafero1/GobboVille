@@ -9,6 +9,7 @@ public class FoodStorage : Storage {
     void Start () {
         setUnits (Random.Range (0, getCapacity ()));
         displayText = gameObject.GetComponentInChildren<TextMesh> ();
+        displayText.text = $"{getUnits()}/{getCapacity()}";
     }
 
     // Update is called once per frame

@@ -11,9 +11,7 @@ public interface Node {
 public enum NodeStatus {
     SUCCESS,
     FAIL,
-    RUNNING,
-    EATING,
-    COLLECTING
+    RUNNING
 }
 
 /// Composite Node pode ter vários filhos
@@ -79,8 +77,11 @@ public class Succeder : DecoratorNode {
 /// Executa o filho até retornar fail
 public class UntilFail : DecoratorNode {
     override public NodeStatus run () {
-        if (getChild ().run () == NodeStatus.FAIL) return NodeStatus.SUCCESS;
-        else return NodeStatus.RUNNING;
+        while (getChild ().run () != NodeStatus.FAIL) {
+            NodeStatus result = getChild ().run ();
+            return NodeStatus.RUNNING;
+        }
+        return NodeStatus.SUCCESS;
     }
 }
 
@@ -99,7 +100,7 @@ public class Sequence : CompositeNode {
                 // Se o filho retornar success, passa pro próximo
                 if (result == NodeStatus.SUCCESS) {
                     done.Add (child);
-                    return NodeStatus.RUNNING;
+                    //return NodeStatus.RUNNING;
                 }
                 // Se retornar fail, cancela execução e retorna fail
                 else return result;
@@ -126,7 +127,7 @@ public class Selector : CompositeNode {
                 // Se o filho retornar fail, passa pro próximo
                 if (result == NodeStatus.FAIL) {
                     done.Add (child);
-                    return NodeStatus.RUNNING;
+                    //return NodeStatus.RUNNING;
                 }
                 // Se o filho retornar success, termina a execução e retorna success
                 else return result;
@@ -138,7 +139,7 @@ public class Selector : CompositeNode {
     }
 }
 
-/////////// Leaf Nodes ///////////
+//////////////////////////////////////// Leaf Nodes ////////////////////////////////////////
 
 /// Node para mover o BehaviourAgent para frente.
 public class SimpleWalkNode : Node {

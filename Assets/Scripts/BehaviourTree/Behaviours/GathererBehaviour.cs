@@ -68,7 +68,7 @@ public class EatNode : Node {
         agent.hunger -= 50;
         foodStorage.decreaseUnit ();
 
-        return NodeStatus.EATING;
+        return NodeStatus.FAIL;
 
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Storage : MonoBehaviour {
     // Capacidade máxima
-    public int capacity = 15;
+    public int capacity;
 
     // Nível atual
     public int units;

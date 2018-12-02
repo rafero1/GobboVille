@@ -24,6 +24,7 @@ public abstract class BehaviourAgent : MonoBehaviour {
     }
     public void updateAttributes () {
         hunger += (2 * Time.deltaTime);
+        thirst += (2 * Time.deltaTime);
         Debug.Log ($"hunger: {hunger}, thirst: {thirst}", this);
     }
 

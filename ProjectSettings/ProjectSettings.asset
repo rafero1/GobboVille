@@ -709,12 +709,12 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Collab: 1
+    Collab: 0
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 3
   cloudProjectId: b326391a-258d-4d5e-ab9e-b61617e20fc5
-  projectName: 2DFallTest
+  projectName: GobboVille
   organizationId: crusty-pixels
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
