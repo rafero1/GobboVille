@@ -157,7 +157,6 @@ public class SimpleWalkNode : Node {
 }
 
 /// Node para mover o BehaviourAgent para algum alvo Transform.
-
 public class WalkToNode : Node {
     Transform transform;
     Transform target;
@@ -190,6 +189,7 @@ public class WalkToNode : Node {
     }
 }
 
+/// Node para achar algum alvo aleatória.
 public class FindTarget : Node {
     BehaviourAgent invader;
     string TargetType;
@@ -218,7 +218,6 @@ public class FindTarget : Node {
 }
 
 /// Node para mover o BehaviourAgent para algum alvo BehaviourAgent.
-
 public class WalkToTargetNode : Node {
     BehaviourAgent invader;
     Transform transform;
@@ -251,8 +250,7 @@ public class WalkToTargetNode : Node {
     }
 }
 
-/// Nodes para o Wander
-
+/// Node para encontrar uma posição aleatória.
 class FindRandomPositionNode : Node {
     private GameObject floor;
     private BehaviourAgent BehaviourAgent;
@@ -269,6 +267,7 @@ class FindRandomPositionNode : Node {
     }
 }
 
+/// Node para mover o BehaviourAgent para alguma posição Vector3.
 public class WalkToPositionNode : Node {
     private BehaviourAgent BehaviourAgent;
 
@@ -299,6 +298,7 @@ public class WalkToPositionNode : Node {
     }
 }
 
+/// Node para esperar por uma determinada quantidade de tempo.
 public class WaitNode : Node {
     private BehaviourAgent BehaviourAgent;
     private float time;
@@ -330,7 +330,7 @@ public class WaitNode : Node {
 
         // Contando os segundos
         time += 1 * Time.deltaTime;
-        Debug.Log ($"Waiting ({(int)time} out of {stopTime})", BehaviourAgent);
+        //Debug.Log ($"Waiting ({(int)time} out of {stopTime})", BehaviourAgent);
         if (time >= stopTime) {
             time = 0;
             stopTime = 0;

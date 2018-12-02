@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GathererBehaviour : BehaviourAgent {
     private Sequence BTWander;
-    private Sequence BTGetResource;
+    private Sequence BTGatherResource;
     private Sequence BTEat;
 
     public bool gathering = false;
@@ -28,21 +28,22 @@ public class GathererBehaviour : BehaviourAgent {
         BTWander.addChild (new WalkToPositionNode (this));
         BTWander.addChild (new WaitNode (2, 5, this));
 
-        // Coletar água
-        BTGetResource = new Sequence ();
-        BTGetResource.addChild (new QueroTrabalhar ());
-        BTGetResource.addChild (new WalkToNode (transform, gatheringPoint.transform));
-        BTGetResource.addChild (new River ());
-        BTGetResource.addChild (new WalkToNode (transform, storage.transform));
-        BTGetResource.addChild (new StoreResource (storage, this));
+        // Coletar
+        BTGatherResource = new Sequence ();
+        BTGatherResource.addChild (new QueroTrabalhar ());
+        BTGatherResource.addChild (new WalkToNode (transform, gatheringPoint.transform));
+        BTGatherResource.addChild (new WaitNode (2, this));
+        BTGatherResource.addChild (new WalkToNode (transform, storage.transform));
+        BTGatherResource.addChild (new StoreResource (storage, this));
     }
 
     // Update is called once per frame
     void Update () {
-        if (isHungry) {
+        updateAttributes ();
+        if (isHungry ()) {
             BTEat.run ();
-        } else if (storage.isFull () || this.gathering) {
-            BTGetResource.run ();
+        } else if (!storage.isFull () || this.gathering) {
+            BTGatherResource.run ();
         } else {
             BTWander.run ();
         }
@@ -64,25 +65,11 @@ public class EatNode : Node {
             return NodeStatus.SUCCESS;
         }
 
-        agent.hunger--;
+        agent.hunger -= 50;
         foodStorage.decreaseUnit ();
 
         return NodeStatus.EATING;
 
-    }
-}
-
-// agente verifica o valor da reserva
-// na hora da coleta o coletador começa a sentir fome
-public class River : Node // adicionaFome
-{
-
-    public River () {
-
-    }
-
-    public NodeStatus run () {
-        return NodeStatus.SUCCESS;
     }
 }
 
@@ -121,9 +108,7 @@ public class QueroTrabalhar : Node {
     }
 
     public NodeStatus run () {
-        // Máximo valor de fome é 10
         quero = Random.Range (0, 2);
-        Debug.Log (quero + " valor quero");
         if (quero == 1) {
             return NodeStatus.SUCCESS;
         }

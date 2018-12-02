@@ -4,33 +4,43 @@ using UnityEngine;
 
 public abstract class Storage : MonoBehaviour {
     // Capacidade máxima
-    private int capacity = 15;
+    public int capacity = 15;
 
     // Nível atual
-    private int units;
+    public int units;
 
     public virtual int getUnits () {
         return units;
     }
 
     public virtual void setUnits (int amount) {
+        int oldValue = units;
         units = amount;
+        onUnitChangeListener (oldValue, units);
     }
 
     public virtual void addUnit () {
+        int oldValue = units;
         units++;
+        onUnitChangeListener (oldValue, units);
     }
 
     public virtual void addUnits (int amount) {
+        int oldValue = units;
         units += amount;
+        onUnitChangeListener (oldValue, units);
     }
 
     public virtual void decreaseUnit () {
+        int oldValue = units;
         units--;
+        onUnitChangeListener (oldValue, units);
     }
 
     public virtual void decreaseUnits (int amount) {
+        int oldValue = units;
         units -= amount;
+        onUnitChangeListener (oldValue, units);
     }
 
     public virtual int getCapacity () {
@@ -46,4 +56,6 @@ public abstract class Storage : MonoBehaviour {
             return true;
         else return false;
     }
+
+    public virtual void onUnitChangeListener (int oldValue, int newValue) { }
 }
