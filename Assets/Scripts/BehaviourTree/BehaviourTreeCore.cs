@@ -274,7 +274,7 @@ class FindRandomPositionNode : Node {
     }
 
     public NodeStatus run () {
-        Vector3 position = new Vector3 (Random.Range (-50, 50), 0f, Random.Range (-50, 50));
+        Vector3 position = new Vector3 (Random.Range (-50, 50), 0f, Random.Range (-30, 30));
         BehaviourAgent.targetPosition = position;
         return NodeStatus.SUCCESS;
     }
