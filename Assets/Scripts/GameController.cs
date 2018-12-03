@@ -22,62 +22,60 @@ public class GameController : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
-        entityList = getAllEntities();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        rotateSun(rotationSpeed);
-	}
+    public FoodStorage foodStorage;
+    public WaterStorage waterStorage;
 
-    void rotateSun(float speed)
-    {
-        Transform sun = PrimaryLightSource.GetComponent<Transform>();
-        if (sun.localRotation.eulerAngles.x > 0 && sun.localRotation.eulerAngles.x < 180)
-        {
+    // Use this for initialization
+    void Start () {
+        entityList = getAllEntities ();
+    }
+
+    // Update is called once per frame
+    void Update () {
+        rotateSun (rotationSpeed);
+    }
+
+    void rotateSun (float speed) {
+        Transform sun = PrimaryLightSource.GetComponent<Transform> ();
+        if (sun.localRotation.eulerAngles.x > 0 && sun.localRotation.eulerAngles.x < 180) {
             daytime = true;
         } else if (sun.localRotation.eulerAngles.x > 180 || sun.localRotation.eulerAngles.x < 0) {
             daytime = false;
         }
-        sun.Rotate(speed, 0, 0);
+        sun.Rotate (speed, 0, 0);
     }
 
-    public GameObject[] getEntitiesByTag(string tag)
-    {
-        return GameObject.FindGameObjectsWithTag(tag);
+    public GameObject[] getEntitiesByTag (string tag) {
+        return GameObject.FindGameObjectsWithTag (tag);
     }
 
-    public List<GameObject> getAllEntities()
-    {
-        List<GameObject> rs = new List<GameObject>();
+    public List<GameObject> getAllEntities () {
+        List<GameObject> rs = new List<GameObject> ();
 
-        foreach (GameObject item in getEntitiesByTag("Peasant"))
-        {
-            rs.Add(item);
+        foreach (GameObject item in getEntitiesByTag ("Peasant")) {
+            rs.Add (item);
         }
 
-        foreach (GameObject item in getEntitiesByTag("Guard"))
-        {
-            rs.Add(item);
+        foreach (GameObject item in getEntitiesByTag ("Guard")) {
+            rs.Add (item);
         }
 
-        foreach (GameObject item in getEntitiesByTag("Invader"))
-        {
-            rs.Add(item);
+        foreach (GameObject item in getEntitiesByTag ("Invader")) {
+            rs.Add (item);
         }
 
         return rs;
     }
 
-    public void addToList(GameObject entity)
-    {
-        entityList.Add(entity);
+    public void addToList (GameObject entity) {
+        entityList.Add (entity);
     }
 
-    public void removeFromList(GameObject entity)
-    {
-        entityList.Remove(entity);
+    public void removeFromList (GameObject entity) {
+        entityList.Remove (entity);
+    }
+
+    public static GameController GetGameController () {
+        return GameObject.Find ("GameController").GetComponent<GameController> ();
     }
 }

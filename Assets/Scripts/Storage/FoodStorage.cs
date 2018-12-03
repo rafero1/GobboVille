@@ -7,7 +7,7 @@ public class FoodStorage : Storage {
 
     // Use this for initialization
     void Start () {
-        setUnits (Random.Range (0, getCapacity ()));
+        setUnits (getCapacity ());
         displayText = gameObject.GetComponentInChildren<TextMesh> ();
         displayText.text = $"{getUnits()}/{getCapacity()}";
     }

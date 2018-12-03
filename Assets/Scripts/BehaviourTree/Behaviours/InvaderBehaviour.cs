@@ -3,31 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InvaderBehaviour : BehaviourAgent {
-    // Achar alvo
-    //   Atacar alvo
-
     private Sequence BT;
     private GameController gameController;
 
     // Use this for initialization
     void Start () {
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        BT = new Sequence();
+        InitAttributes ();
+        gameController = GameController.GetGameController ();
+        BT = new Sequence ();
 
-        BT.addChild(new FindTarget(this, "Peasant"));
-        BT.addChild(new WalkToTargetNode(this) { speed = 10f });
+        BT.addChild (new FindTarget (this, "Peasant"))
+            .addChild (new WalkToTargetNode (this));
     }
 
-	// Update is called once per frame
-	void Update () {
-        BT.run();
-	}
+    // Update is called once per frame
+    void Update () {
+        BT.run ();
+    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Peasant")
-        {
-            collision.gameObject.SetActive(false);
+    private void OnCollisionEnter (Collision collision) {
+        if (collision.gameObject.tag == "Peasant") {
+            collision.gameObject.SetActive (false);
         }
     }
 

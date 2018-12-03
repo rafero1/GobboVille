@@ -5,45 +5,65 @@ using UnityEngine;
 public class GuardBehaviour : BehaviourAgent {
 
     private GameController gameController;
-    private Sequence BTNight;
-    private Sequence BTDay;
-    private Sequence BTEnemy;
+    private Selector BT;
     public List<Transform> patrolPoints;
     // Use this for initialization
     void Start () {
-        gameController = GameObject.Find ("GameController").GetComponent<GameController> ();
+        InitAttributes ();
+        FoodStorage foodStorage = GameController.GetGameController ().foodStorage;
+        WaterStorage waterStorage = GameController.GetGameController ().waterStorage;
+        gameController = GameController.GetGameController ();
 
-        // Behaviour durante a noite
-        BTNight = new Sequence ();
+        // Root
+        BT = new Selector ();
+
+        // Inimigo existe
+        Sequence SequenceEnemyExists = new Sequence ();
+        SequenceEnemyExists.addChild (new DoesEnemyExists (gameController))
+            .addChild (new FindTarget (this, "Invader"))
+            .addChild (new WalkToTargetNode (this) { speed = 20f });
+
+        // Quando é dia
+        Selector SelectorDayActivities = new Selector ();
+        // Quando é dia: Cumer
+        Sequence SequenceEat = new Sequence ();
+        SequenceEat.addChild (new IsHungryNode (this))
+            .addChild (new WalkToNode (transform, foodStorage.transform))
+            .addChild (new EatNode (this, foodStorage));
+        // Quando é dia: Beber
+        Sequence SequenceDrink = new Sequence ();
+        SequenceDrink.addChild (new IsThirstyNode (this))
+            .addChild (new WalkToNode (transform, waterStorage.transform))
+            .addChild (new DrinkNode (this, waterStorage));
+        // Quando é dia: Wander
+        Sequence SequenceWander = new Sequence ();
+        SequenceWander.addChild (new FindRandomPositionNode (GameObject.Find ("Floor"), this))
+            .addChild (new WalkToPositionNode (this))
+            .addChild (new WaitNode (2, 5, this));
+        // Quando é dia: Selector
+        SelectorDayActivities.addChild (SequenceEat)
+            .addChild (SequenceDrink)
+            .addChild (SequenceWander);
+        // Quando é dia: Juntando
+        Sequence SequenceDaytime = new Sequence ();
+        SequenceDaytime.addChild (new IsDayNode (gameController))
+            .addChild (new WalkToPositionNode (this))
+            .addChild (SelectorDayActivities);
+
+        // Quando é noite
+        Sequence SequenceNight = new Sequence ();
         foreach (Transform target in patrolPoints) {
-            WalkToNode node = new WalkToNode (transform, target) { speed = 20f };
-            BTNight.addChild (node);
+            WalkToNode node = new WalkToNode (transform, target) { speed = 10f };
+            SequenceNight.addChild (node);
         }
 
-        // Behaviour durante o dia
-        BTDay = new Sequence ();
-        BTDay.addChild (new FindRandomPositionNode (GameObject.Find ("Floor"), this));
-        BTDay.addChild (new WalkToPositionNode (this));
-        BTDay.addChild (new WaitNode (2, 5 , this));
-
-        // Behaviour quando inimigo existe
-        BTEnemy = new Sequence ();
-        BTEnemy.addChild (new FindTarget (this, "Invader"));
-        BTEnemy.addChild (new WalkToTargetNode (this) { speed = 20f });
-
+        BT.addChild (SequenceEnemyExists).addChild (SequenceDaytime).addChild (SequenceNight);
     }
 
     // Update is called once per frame
     void Update () {
-        if (!gameController.EnemyExists) {
-            if (gameController.Night) {
-                BTNight.run ();
-            } else {
-                BTDay.run ();
-            }
-        } else {
-            BTEnemy.run ();
-        }
+        updateAttributes ();
+        BT.run ();
     }
 
     private void OnCollisionEnter (Collision collision) {
@@ -51,5 +71,31 @@ public class GuardBehaviour : BehaviourAgent {
             collision.gameObject.SetActive (false);
             gameController.enemyCounter--;
         }
+    }
+}
+
+internal class DoesEnemyExists : Node {
+    private GameController gameController;
+
+    public DoesEnemyExists (GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public NodeStatus run () {
+        if (gameController.EnemyExists) return NodeStatus.SUCCESS;
+        else return NodeStatus.FAIL;
+    }
+}
+
+internal class IsDayNode : Node {
+    private GameController gameController;
+
+    public IsDayNode (GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    public NodeStatus run () {
+        if (gameController.Day) return NodeStatus.SUCCESS;
+        else return NodeStatus.FAIL;
     }
 }

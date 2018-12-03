@@ -5,18 +5,14 @@ using UnityEngine;
 public class GathererBehaviour : BehaviourAgent {
 
     private Selector BT;
-
-    public bool gathering = false;
     public GatheringPoint gatheringPoint;
     public Storage storage;
-
-    public FoodStorage foodStorage;
-    public WaterStorage waterStorage;
 
     // Use this for initialization
     void Start () {
         InitAttributes ();
-
+        FoodStorage foodStorage = GameController.GetGameController ().foodStorage;
+        WaterStorage waterStorage = GameController.GetGameController ().waterStorage;
         // Root
         BT = new Selector ();
 
@@ -34,7 +30,6 @@ public class GathererBehaviour : BehaviourAgent {
 
         // Coletar
         Sequence SequenceGatherResource = new Sequence ();
-        //SequenceGatherResource.addChild (new QueroTrabalhar ())
         SequenceGatherResource.addChild (new IsStorageFullNode (storage))
             .addChild (new WalkToNode (transform, gatheringPoint.transform))
             .addChild (new WaitNode (2, this))
@@ -152,7 +147,7 @@ public class StoreResource : Node {
     }
 
     public NodeStatus run () {
-        storage.addUnit ();
+        storage.addUnits (5);
         return NodeStatus.SUCCESS;
 
     }
