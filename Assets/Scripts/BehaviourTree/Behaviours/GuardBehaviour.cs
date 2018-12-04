@@ -6,6 +6,7 @@ public class GuardBehaviour : BehaviourAgent {
 
     private GameController gameController;
     private Selector BT;
+    private Sequence SequenceEnemyExists;
     public List<Transform> patrolPoints;
     // Use this for initialization
     void Start () {
@@ -18,7 +19,7 @@ public class GuardBehaviour : BehaviourAgent {
         BT = new Selector ();
 
         // Inimigo existe
-        Sequence SequenceEnemyExists = new Sequence ();
+        SequenceEnemyExists = new Sequence ();
         SequenceEnemyExists.addChild (new DoesEnemyExists (gameController))
             .addChild (new FindTarget (this, "Invader"))
             .addChild (new WalkToTargetNode (this) { speed = 20f });
@@ -64,6 +65,7 @@ public class GuardBehaviour : BehaviourAgent {
     void Update () {
         updateAttributes ();
         BT.run ();
+        if (gameController.EnemyExists) SequenceEnemyExists.run();
     }
 
     private void OnCollisionEnter (Collision collision) {

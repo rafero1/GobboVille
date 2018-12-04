@@ -244,14 +244,13 @@ public class WalkToTargetNode : Node {
         if (target == null) {
             return NodeStatus.FAIL;
         }
-
         invader.agent.SetDestination(target.position);
 
         Vector3 distance = target.position -transform.position;
 
         if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
 
-        return NodeStatus.RUNNING; 
+        return NodeStatus.RUNNING;
     }
 }
 
