@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// Interface dos Nodes da BehaviourTree
 public interface Node {
@@ -175,9 +176,12 @@ public class WalkToNode : Node {
     Transform target;
     public float speed = 4f;
 
+    NavMeshAgent agent;
+
     public WalkToNode (Transform transform, Transform target) {
         this.transform = transform;
         this.target = target;
+        agent = transform.GetComponent<NavMeshAgent>();
     }
 
     public NodeStatus run () {
@@ -187,16 +191,10 @@ public class WalkToNode : Node {
             return NodeStatus.FAIL;
         }
 
-        // Pega o vetor distância do transform até o alvo e normaliza pra obter valores pequenos para o movimento.
-        Vector3 distance = target.position - transform.position;
-        transform.Translate ((distance.normalized * speed) * Time.deltaTime);
+        agent.SetDestination(target.position);
 
-        if (transform.position.x >= target.position.x - 1 &&
-            transform.position.x <= target.position.x + 1 &&
-            transform.position.z >= target.position.z - 1 &&
-            transform.position.z <= target.position.z + 1) {
-            return NodeStatus.SUCCESS;
-        }
+        Vector3 distance = target.position - transform.position;
+        if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
 
         return NodeStatus.RUNNING;
     }
@@ -248,18 +246,13 @@ public class WalkToTargetNode : Node {
             return NodeStatus.FAIL;
         }
 
-        // Pega o vetor distância do transform até o alvo e normaliza pra obter valores pequenos para o movimento.
-        Vector3 distance = target.position - transform.position;
-        transform.Translate ((distance.normalized * speed) * Time.deltaTime);
+        invader.agent.SetDestination(target.position);
 
-        if (transform.position.x >= target.position.x - 1 &&
-            transform.position.x <= target.position.x + 1 &&
-            transform.position.z >= target.position.z - 1 &&
-            transform.position.z <= target.position.z + 1) {
-            return NodeStatus.SUCCESS;
-        }
+        Vector3 distance = target.position -transform.position;
 
-        return NodeStatus.RUNNING;
+        if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
+
+        return NodeStatus.RUNNING; 
     }
 }
 
@@ -274,8 +267,19 @@ class FindRandomPositionNode : Node {
     }
 
     public NodeStatus run () {
-        Vector3 position = new Vector3 (Random.Range (-50, 50), 0f, Random.Range (-30, 30));
-        BehaviourAgent.targetPosition = position;
+        Vector3 result = Vector3.forward;
+        for (int i = 0; i < 30; i++)
+        {
+            Vector3 randomPoint = BehaviourAgent.transform.position + Random.insideUnitSphere * 5;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                break;
+            }
+        }
+
+        BehaviourAgent.targetPosition = result;
         return NodeStatus.SUCCESS;
     }
 }
@@ -296,16 +300,10 @@ public class WalkToPositionNode : Node {
             return NodeStatus.FAIL;
         }
 
-        // Pega o vetor distância do transform até o alvo e normaliza pra obter valores pequenos para o movimento.
-        Vector3 distance = target - transform.position;
-        transform.Translate ((distance.normalized * 4f) * Time.deltaTime);
+        BehaviourAgent.agent.SetDestination(target);
 
-        if (transform.position.x >= target.x - 1 &&
-            transform.position.x <= target.x + 1 &&
-            transform.position.z >= target.z - 1 &&
-            transform.position.z <= target.z + 1) {
-            return NodeStatus.SUCCESS;
-        }
+        Vector3 distance = target - transform.position;
+        if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
 
         return NodeStatus.RUNNING;
     }

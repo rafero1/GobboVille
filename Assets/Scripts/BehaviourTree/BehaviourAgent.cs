@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 public abstract class BehaviourAgent : MonoBehaviour {
     // Atributos
     public float hunger;
@@ -28,8 +30,13 @@ public abstract class BehaviourAgent : MonoBehaviour {
         Debug.Log ($"hunger: {hunger}, thirst: {thirst}", this);
     }
 
+    void Awake() {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     // Pathfinding
     public Transform Target;
     public Vector3 targetPosition;
+    public NavMeshAgent agent;
 
 }
