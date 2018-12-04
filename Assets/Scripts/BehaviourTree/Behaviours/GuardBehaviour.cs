@@ -47,7 +47,7 @@ public class GuardBehaviour : BehaviourAgent {
         // Quando é dia: Juntando
         Sequence SequenceDaytime = new Sequence ();
         SequenceDaytime.addChild (new IsDayNode (gameController))
-            .addChild (new WalkToPositionNode (this))
+            //.addChild (new WalkToPositionNode (this))
             .addChild (SelectorDayActivities);
 
         // Quando é noite
@@ -57,7 +57,11 @@ public class GuardBehaviour : BehaviourAgent {
             SequenceNight.addChild (node);
         }
 
-        BT.addChild (SequenceEnemyExists).addChild (SequenceDaytime).addChild (SequenceNight);
+        BT
+        .addChild (SequenceEnemyExists)
+            .addChild (SequenceDaytime)
+          .addChild (SequenceNight)
+        ;
     }
 
     // Update is called once per frame

@@ -154,22 +154,6 @@ public class Selector : CompositeNode {
 //                                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-/// Node para mover o BehaviourAgent para frente.
-public class SimpleWalkNode : Node {
-    public Transform transform;
-    public float speed = 4f;
-
-    public SimpleWalkNode (Transform t) {
-        transform = t;
-    }
-
-    public NodeStatus run () {
-        // Debug.Log("Running WalkNode!");
-        transform.Translate ((transform.forward * speed) * Time.deltaTime);
-        return NodeStatus.RUNNING;
-    }
-}
-
 /// Node para mover o BehaviourAgent para algum alvo Transform.
 public class WalkToNode : Node {
     Transform transform;
@@ -192,6 +176,7 @@ public class WalkToNode : Node {
         }
 
         agent.SetDestination(target.position);
+        agent.speed = speed;
 
         Vector3 distance = target.position - transform.position;
         if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
@@ -246,6 +231,7 @@ public class WalkToTargetNode : Node {
         }
 
         invader.agent.SetDestination(target.position);
+        invader.agent.speed = speed;
 
         Vector3 distance = target.position -transform.position;
 
@@ -266,10 +252,10 @@ class FindRandomPositionNode : Node {
     }
 
     public NodeStatus run () {
-        Vector3 result = Vector3.forward;
+        Vector3 result = new Vector3(10, 10, 10);
         for (int i = 0; i < 30; i++)
         {
-            Vector3 randomPoint = BehaviourAgent.transform.position + Random.insideUnitSphere * 5;
+            Vector3 randomPoint = BehaviourAgent.transform.position + Random.insideUnitSphere * 10;
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
             {
@@ -286,6 +272,7 @@ class FindRandomPositionNode : Node {
 /// Node para mover o BehaviourAgent para alguma posição Vector3.
 public class WalkToPositionNode : Node {
     private BehaviourAgent BehaviourAgent;
+    public float speed = 4;
 
     public WalkToPositionNode (BehaviourAgent BehaviourAgent) {
         this.BehaviourAgent = BehaviourAgent;
@@ -300,9 +287,11 @@ public class WalkToPositionNode : Node {
         }
 
         BehaviourAgent.agent.SetDestination(target);
+        BehaviourAgent.agent.speed = speed;
+
 
         Vector3 distance = target - transform.position;
-        if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
+        if (distance.sqrMagnitude < 1) return NodeStatus.SUCCESS;
 
         return NodeStatus.RUNNING;
     }
