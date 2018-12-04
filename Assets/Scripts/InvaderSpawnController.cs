@@ -11,34 +11,31 @@ public class InvaderSpawnController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        gameController = GameController.GetGameController ();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (gameController.Night)
-        {
+
+    // Update is called once per frame
+    void Update () {
+        if (gameController.Night) {
             if (!spawnLocked)
-            StartCoroutine(Spawning());
-        } else
-        {
-            StopCoroutine(Spawning());
+                StartCoroutine (Spawning ());
+        } else {
+            StopCoroutine (Spawning ());
             spawnLocked = false;
         }
     }
 
-    IEnumerator Spawning()
-    {
+    IEnumerator Spawning () {
         spawnLocked = true;
-        yield return new WaitForSecondsRealtime(Random.Range((int)interval/2, interval));
-        SpawnInvader(new Vector3(transform.position.x, transform.position.y, transform.position.z), invaderParent);
+        yield return new WaitForSecondsRealtime (Random.Range ((int) interval / 2, interval));
+        SpawnInvader (new Vector3 (transform.position.x, transform.position.y, transform.position.z), invaderParent);
         spawnLocked = false;
     }
 
-    public void SpawnInvader(Vector3 position, Transform parent)
-    {
+    public void SpawnInvader (Vector3 position, Transform parent) {
         GameObject invader = invaderPrefab;
-        Instantiate(invader, position, Quaternion.identity, parent);
+        Instantiate (invader, position, Quaternion.identity, parent);
+        gameController.addToList (invader);
         gameController.enemyCounter++;
     }
 }

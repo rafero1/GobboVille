@@ -24,6 +24,7 @@ public class InvaderBehaviour : BehaviourAgent {
     private void OnCollisionEnter (Collision collision) {
         if (collision.gameObject.tag == "Peasant") {
             collision.gameObject.SetActive (false);
+            gameController.removeFromList (collision.gameObject);
         }
     }
 

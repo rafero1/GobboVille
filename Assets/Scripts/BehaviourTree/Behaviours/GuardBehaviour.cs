@@ -70,6 +70,7 @@ public class GuardBehaviour : BehaviourAgent {
         if (collision.gameObject.tag == "Invader") {
             collision.gameObject.SetActive (false);
             gameController.enemyCounter--;
+            gameController.removeFromList (collision.gameObject);
         }
     }
 }

@@ -213,8 +213,7 @@ public class FindTarget : Node {
     }
 
     public NodeStatus run () {
-        GameController controller = GameObject.Find ("GameController").GetComponent<GameController> ();
-        List<GameObject> list = new List<GameObject> (controller.getEntitiesByTag (TargetType));
+        List<GameObject> list = new List<GameObject> (GameObject.FindGameObjectsWithTag (TargetType));
 
         if (list.Count >= 1) {
             int joker = (int) Random.Range (0, list.Count - 1);
@@ -274,7 +273,7 @@ class FindRandomPositionNode : Node {
     }
 
     public NodeStatus run () {
-        Vector3 position = new Vector3 (Random.Range (-50, 50), 0f, Random.Range (-30, 30));
+        Vector3 position = new Vector3 (Random.Range (-50, 50), 0f, Random.Range (-48, 30));
         BehaviourAgent.targetPosition = position;
         return NodeStatus.SUCCESS;
     }
@@ -289,7 +288,7 @@ public class WalkToPositionNode : Node {
     }
 
     public NodeStatus run () {
-        Debug.Log ("Walking", BehaviourAgent);
+        //Debug.Log ("Walking", BehaviourAgent);
         Vector3 target = BehaviourAgent.targetPosition;
         Transform transform = BehaviourAgent.transform;
         if (target == null) {

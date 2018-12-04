@@ -25,7 +25,7 @@ public abstract class BehaviourAgent : MonoBehaviour {
     public void updateAttributes () {
         hunger += (1 * Time.deltaTime);
         thirst += (1 * Time.deltaTime);
-        Debug.Log ($"hunger: {hunger}, thirst: {thirst}", this);
+        //Debug.Log ($"hunger: {hunger}, thirst: {thirst}", this);
     }
 
     // Pathfinding
