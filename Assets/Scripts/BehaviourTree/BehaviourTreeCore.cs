@@ -291,7 +291,7 @@ public class WalkToPositionNode : Node {
 
 
         Vector3 distance = target - transform.position;
-        if (distance.sqrMagnitude < 1) return NodeStatus.SUCCESS;
+        if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
 
         return NodeStatus.RUNNING;
     }

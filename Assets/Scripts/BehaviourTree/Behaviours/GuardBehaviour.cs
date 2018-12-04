@@ -47,7 +47,6 @@ public class GuardBehaviour : BehaviourAgent {
         // Quando é dia: Juntando
         Sequence SequenceDaytime = new Sequence ();
         SequenceDaytime.addChild (new IsDayNode (gameController))
-            //.addChild (new WalkToPositionNode (this))
             .addChild (SelectorDayActivities);
 
         // Quando é noite
