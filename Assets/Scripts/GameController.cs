@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
     public GameObject PrimaryLightSource;
     public float rotationSpeed = 0.1f;
-    private List<GameObject> entityList;
+    public List<GameObject> agentList;
     public int enemyCounter;
     private bool daytime = true;
     public bool Day {
@@ -27,7 +28,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        entityList = getAllEntities ();
+        agentList = getAllAgents ();
     }
 
     // Update is called once per frame
@@ -45,22 +46,18 @@ public class GameController : MonoBehaviour {
         sun.Rotate (speed, 0, 0);
     }
 
-    public GameObject[] getEntitiesByTag (string tag) {
-        return GameObject.FindGameObjectsWithTag (tag);
-    }
-
-    public List<GameObject> getAllEntities () {
+    public List<GameObject> getAllAgents () {
         List<GameObject> rs = new List<GameObject> ();
 
-        foreach (GameObject item in getEntitiesByTag ("Peasant")) {
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Peasant")) {
             rs.Add (item);
         }
 
-        foreach (GameObject item in getEntitiesByTag ("Guard")) {
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Guard")) {
             rs.Add (item);
         }
 
-        foreach (GameObject item in getEntitiesByTag ("Invader")) {
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag ("Invader")) {
             rs.Add (item);
         }
 
@@ -68,14 +65,22 @@ public class GameController : MonoBehaviour {
     }
 
     public void addToList (GameObject entity) {
-        entityList.Add (entity);
+        agentList.Add (entity);
     }
 
     public void removeFromList (GameObject entity) {
-        entityList.Remove (entity);
+        agentList.Remove (entity);
+    }
+
+    public GameObject getAgent (int index) {
+        return agentList[index];
     }
 
     public static GameController GetGameController () {
         return GameObject.Find ("GameController").GetComponent<GameController> ();
+    }
+
+    public void ResetScene () {
+        SceneManager.LoadScene (SceneManager.GetSceneAt (0).name);
     }
 }
