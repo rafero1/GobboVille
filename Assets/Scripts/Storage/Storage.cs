@@ -57,5 +57,11 @@ public abstract class Storage : MonoBehaviour {
         else return false;
     }
 
+    public virtual bool isEmpty () {
+        if (units <= 0)
+            return true;
+        else return false;
+    }
+
     public virtual void onUnitChangeListener (int oldValue, int newValue) { }
 }
