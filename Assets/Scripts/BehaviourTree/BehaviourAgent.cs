@@ -23,8 +23,8 @@ public abstract class BehaviourAgent : MonoBehaviour {
         thirst = Random.Range (0, thirstThreshold);
     }
     public void updateAttributes () {
-        hunger += (2 * Time.deltaTime);
-        thirst += (2 * Time.deltaTime);
+        hunger += (1 * Time.deltaTime);
+        thirst += (1 * Time.deltaTime);
         Debug.Log ($"hunger: {hunger}, thirst: {thirst}", this);
     }
 

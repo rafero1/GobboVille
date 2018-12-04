@@ -78,15 +78,11 @@ public class DrinkNode : Node {
     }
 
     public NodeStatus run () {
-        if (agent.thirst == 0) {
+        if (!waterStorage.isEmpty ()) {
+            waterStorage.decreaseUnit ();
+            agent.thirst -= 100;
             return NodeStatus.SUCCESS;
-        }
-
-        agent.thirst -= 50;
-        waterStorage.decreaseUnit ();
-
-        return NodeStatus.FAIL;
-
+        } else return NodeStatus.FAIL;
     }
 }
 
@@ -113,15 +109,11 @@ public class EatNode : Node {
     }
 
     public NodeStatus run () {
-        if (agent.hunger == 0) {
+        if (!foodStorage.isEmpty ()) {
+            foodStorage.decreaseUnit ();
+            agent.hunger -= 100;
             return NodeStatus.SUCCESS;
-        }
-
-        agent.hunger -= 50;
-        foodStorage.decreaseUnit ();
-
-        return NodeStatus.FAIL;
-
+        } else return NodeStatus.FAIL;
     }
 }
 
@@ -147,9 +139,11 @@ public class StoreResource : Node {
     }
 
     public NodeStatus run () {
-        storage.addUnits (5);
-        return NodeStatus.SUCCESS;
-
+        if (!storage.isFull ()) {
+            storage.addUnit ();
+            if (!storage.isFull ()) storage.addUnit ();
+            return NodeStatus.SUCCESS;
+        } else return NodeStatus.FAIL;
     }
 }
 
