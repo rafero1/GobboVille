@@ -5,6 +5,7 @@ using UnityEngine;
 public class GuardBehaviour : BehaviourAgent {
 
     private GameController gameController;
+    Sequence SequenceEnemyExists;
     private Selector BT;
     public List<Transform> patrolPoints;
     // Use this for initialization
@@ -18,7 +19,7 @@ public class GuardBehaviour : BehaviourAgent {
         BT = new Selector ();
 
         // Inimigo existe
-        Sequence SequenceEnemyExists = new Sequence ();
+        SequenceEnemyExists = new Sequence ();
         SequenceEnemyExists.addChild (new DoesEnemyExists (gameController))
             .addChild (new FindTarget (this, "Invader"))
             .addChild (new WalkToTargetNode (this) { speed = 20f });
@@ -66,7 +67,8 @@ public class GuardBehaviour : BehaviourAgent {
     // Update is called once per frame
     void Update () {
         updateAttributes ();
-        BT.run ();
+        if (gameController.EnemyExists) SequenceEnemyExists.run();
+        else BT.run ();
     }
 
     private void OnCollisionEnter (Collision collision) {

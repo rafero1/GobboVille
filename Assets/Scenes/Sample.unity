@@ -98,7 +98,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.6
+    agentRadius: 0.65
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -106,7 +106,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.2
+    cellSize: 0.21666665
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -1377,7 +1377,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -2897,7 +2897,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -7564,7 +7564,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -9679,7 +9679,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -13081,7 +13081,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4653203629697254, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.03204253
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4653203629697254, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13113,7 +13113,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4602980035669878, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.033052612
+      value: -0.07898991
       objectReference: {fileID: 0}
     - target: {fileID: 4602980035669878, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13137,7 +13137,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4646335428988274, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.03204253
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4646335428988274, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13161,7 +13161,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4866104825704302, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.03204253
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 4866104825704302, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -13185,7 +13185,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4595865863738816, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.03204253
+      value: -0.099
       objectReference: {fileID: 0}
     - target: {fileID: 4595865863738816, guid: 38186a490c24ef44e9df42937a79bf19, type: 2}
       propertyPath: m_LocalPosition.z
@@ -14347,7 +14347,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
