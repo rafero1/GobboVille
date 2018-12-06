@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23577758805485172}
   - component: {fileID: 65256225997890788}
   - component: {fileID: 54682814188872496}
-  - component: {fileID: 114922348051967548}
   - component: {fileID: 195281172123587396}
   m_Layer: 0
   m_Name: Peasant
@@ -114,24 +113,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114922348051967548
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1659222464854474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52e0df63fd486d49ac8fc09aa89c7f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hunger: 0
-  hungerThreshold: 100
-  thirst: 0
-  thirstThreshold: 100
-  Target: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  agent: {fileID: 0}
 --- !u!195 &195281172123587396
 NavMeshAgent:
   m_ObjectHideFlags: 1

@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23572760113790542}
   - component: {fileID: 65836756100401830}
   - component: {fileID: 54257660305357396}
-  - component: {fileID: 114145408720592612}
   - component: {fileID: 114159743818786936}
   - component: {fileID: 195210258344475988}
   m_Layer: 8
@@ -115,24 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114145408720592612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1961152614215842}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52e0df63fd486d49ac8fc09aa89c7f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hunger: 0
-  hungerThreshold: 100
-  thirst: 0
-  thirstThreshold: 100
-  Target: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  agent: {fileID: 0}
 --- !u!114 &114159743818786936
 MonoBehaviour:
   m_ObjectHideFlags: 1
