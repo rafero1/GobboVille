@@ -31,7 +31,7 @@ public class GathererBehaviour : BehaviourAgent {
         // Coletar
         Sequence SequenceGatherResource = new Sequence ();
         SequenceGatherResource.addChild (new IsStorageFullNode (storage))
-            .addChild (new WalkToNode (transform, gatheringPoint.transform))
+            .addChild (new WalkToNode (transform, gatheringPoint.transform, 30))
             .addChild (new WaitNode (2, this))
             .addChild (new WalkToNode (transform, storage.transform))
             .addChild (new StoreResource (storage, this));

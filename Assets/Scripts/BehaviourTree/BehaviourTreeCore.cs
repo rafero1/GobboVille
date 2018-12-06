@@ -159,27 +159,34 @@ public class WalkToNode : Node {
     Transform transform;
     Transform target;
     public float speed = 4f;
+    private float radius = .5f;
 
     NavMeshAgent agent;
 
     public WalkToNode (Transform transform, Transform target) {
         this.transform = transform;
         this.target = target;
-        agent = transform.GetComponent<NavMeshAgent>();
+        agent = transform.GetComponent<NavMeshAgent> ();
+    }
+
+    public WalkToNode (Transform transform, Transform target, float radius) {
+        this.transform = transform;
+        this.target = target;
+        agent = transform.GetComponent<NavMeshAgent> ();
+        this.radius = radius;
     }
 
     public NodeStatus run () {
-        //Debug.Log("Running WalkToNode!");
         // Cancela se o target não existe
         if (target == null) {
             return NodeStatus.FAIL;
         }
 
-        agent.SetDestination(target.position);
+        agent.SetDestination (target.position);
         agent.speed = speed;
 
         Vector3 distance = target.position - transform.position;
-        if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
+        if (distance.sqrMagnitude < radius) return NodeStatus.SUCCESS;
 
         return NodeStatus.RUNNING;
     }
@@ -229,10 +236,10 @@ public class WalkToTargetNode : Node {
         if (target == null) {
             return NodeStatus.FAIL;
         }
-        invader.agent.SetDestination(target.position);
+        invader.agent.SetDestination (target.position);
         invader.agent.speed = speed;
 
-        Vector3 distance = target.position -transform.position;
+        Vector3 distance = target.position - transform.position;
 
         if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;
 
@@ -251,13 +258,11 @@ class FindRandomPositionNode : Node {
     }
 
     public NodeStatus run () {
-        Vector3 result = new Vector3(10, 10, 10);
-        for (int i = 0; i < 30; i++)
-        {
+        Vector3 result = new Vector3 (10, 10, 10);
+        for (int i = 0; i < 30; i++) {
             Vector3 randomPoint = BehaviourAgent.transform.position + Random.insideUnitSphere * 10;
             NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-            {
+            if (NavMesh.SamplePosition (randomPoint, out hit, 1.0f, NavMesh.AllAreas)) {
                 result = hit.position;
                 break;
             }
@@ -285,9 +290,8 @@ public class WalkToPositionNode : Node {
             return NodeStatus.FAIL;
         }
 
-        BehaviourAgent.agent.SetDestination(target);
+        BehaviourAgent.agent.SetDestination (target);
         BehaviourAgent.agent.speed = speed;
-
 
         Vector3 distance = target - transform.position;
         if (distance.sqrMagnitude < .5) return NodeStatus.SUCCESS;

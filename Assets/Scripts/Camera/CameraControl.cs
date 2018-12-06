@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CameraControl : MonoBehaviour {
 	public Transform camPivot;
-	public Vector3 followCameraDistance;
+	public Vector3 followCameraDistance = new Vector3(0, 15, -15);
 	public bool isFollowing;
 	public Transform agent;
 	public int agentIndex;
@@ -38,14 +38,23 @@ public class CameraControl : MonoBehaviour {
 
 	public void PreviousTarget () {
 		if (isFollowing) {
-			agent = game.getAgent (agentIndex - 1).transform;
+			try {
+				agent = game.getAgent (agentIndex - 1).transform;
+			} catch (System.Exception) {
+				return;
+			}
 			agentIndex--;
 		}
 	}
 
 	public void NextTarget () {
 		if (isFollowing) {
-			agent = game.getAgent (agentIndex + 1).transform;
+			try {
+				agent = game.getAgent (agentIndex + 1).transform;
+
+			} catch (System.Exception) {
+				return;
+			}
 			agentIndex++;
 		}
 	}

@@ -5,7 +5,6 @@ using UnityEngine;
 public class GuardBehaviour : BehaviourAgent {
 
     private GameController gameController;
-    Sequence SequenceEnemyExists;
     private Selector BT;
     private Sequence SequenceEnemyExists;
     public List<Transform> patrolPoints;
